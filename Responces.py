@@ -1,5 +1,11 @@
+#written by Mark Shperkin
 class Responses:
     def __init__(self):
+        self.intro = '''Backgammon is a classic board game that involves strategy, skill, and a bit of luck. Here's a step-by-step guide on how to play Backgammon:
+        please tell me what do you want to know
+        type: 
+        Objective, Setup, Basic Rules, Hitting and Entering, Bearing Off, Winning, Doubling Cube.
+        or just type: give me all the rules'''
         self.objective = '''The objective of Backgammon is to move all your checkers off the board before your opponent does, while also trying to block your opponent's progress.'''
         self.setup = '''Start with a Backgammon board, which consists of 24 narrow triangles or points, divided into four quadrants, with each quadrant having six points.
         Each player has 15 checkers (usually in two contrasting colors, like white and black) and places them on the board as follows:

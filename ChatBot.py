@@ -1,15 +1,13 @@
-# Define a function to handle user input and generate bot responses
+#written by Mark Shperkin
 def Chat_bot(user_input):
     from Responces import Responses
+    from TopicDetector import CheckTopic
     R = Responses()
-    if "hello" in user_input.lower():
+    topic = CheckTopic(user_input)
+    if topic == "hello":
         return "Hi there! How can I help you today?"
-    elif "backgammon" in user_input.lower():
-        return '''Backgammon is a classic board game that involves strategy, skill, and a bit of luck. Here's a step-by-step guide on how to play Backgammon:
-                please tell me what do you want to know
-                type: 
-                Objective, Setup, Basic Rules, Hitting and Entering, Bearing Off, Winning, Doubling Cube.
-                or just type: give me all the rules'''
+    elif topic == "backgammon":
+        return R.intro
     elif "give me all the rules" in user_input.lower():
             return R.objective+R.setup+R.basicRules+R.hittingAndEntering+R.bearingOff+R.winning+R.doublingCube
     elif "objective" in user_input.lower():
@@ -26,17 +24,26 @@ def Chat_bot(user_input):
             return R.winning
     elif "doubling cube" in user_input.lower():
             return R.doublingCube
-    elif "quit" in user_input.lower():
+    elif topic == "you":
+            return "I am a non AI chat-bot.\nMy only goal is to teach anyone how to play backgammon."
+    elif topic == "feel":
+            return '''my creator designed me to be as human as posible but I cannot feel anything.
+        I am an early production, and maybe in the future I will have feelings and emotions.
+        Thank you for asking :)'''
+    elif topic == "quit":
             return "see you late"
     else:
-        return "I'm not sure how to respond to that."
+        return "I'm not sure how to respond to that.\nplease try again"
 
 # Main loop for the chat bot
 while True:
+        
     user_input = input("You: ")
     bot_response = Chat_bot(user_input)
     print("Bot:", bot_response)
-    if user_input.lower() == "quit":
+    from TopicDetector import CheckTopic
+    topic = CheckTopic(user_input)
+    if topic == "quit":
         break
-    
+
 
