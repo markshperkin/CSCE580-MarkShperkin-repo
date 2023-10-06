@@ -31,7 +31,7 @@ def Chat_bot(user_input):
         I am an early production, and maybe in the future I will have feelings and emotions.
         Thank you for asking :)'''
     elif topic == "quit":
-            return "see you late"
+            return "see you later"
     else:
         return "I'm not sure how to respond to that.\nplease try again"
 
