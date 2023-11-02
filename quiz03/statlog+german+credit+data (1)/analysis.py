@@ -6,7 +6,8 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-
+print("Q1 b) Attribute 9 corresponds to personal status and gender and attribute 13 correspond to age in years.")
+print("Q2 b) random forest performed better.")
 data = pd.read_csv('german.data-numeric', header=None, delimiter=r'\s+')
 
 X = data.iloc[:, :-1]
