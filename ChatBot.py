@@ -1,5 +1,6 @@
 #written by Mark Shperkin
 def Chat_bot(user_input):
+    import subprocess
     from Responces import Responses
     from TopicDetector import CheckTopic
     R = Responses()
@@ -24,10 +25,29 @@ def Chat_bot(user_input):
             return R.winning
     elif "doubling cube" in user_input.lower():
             return R.doublingCube
+    elif "play" in user_input.lower():
+            
+            print(" please type 'computer' for playing agaist the computer\nor type 'friend' to play against a friend")
+            user_input = input("You: ")
+
+            if "computer" in user_input.lower():
+                try:
+                    subprocess.run(['python', 'backgammon/single_player.py'], check=True)
+                    return "Game started successfully."
+                except subprocess.CalledProcessError as e:
+                    return f"Error starting the game: {e}"  
+            elif "friend" in user_input.lower():
+                try:
+                    subprocess.run(['python', 'backgammon/two_player.py'], check=True)
+                    return "Game started successfully."
+                except subprocess.CalledProcessError as e: 
+                    return f"Error starting the game: {e}"
+            else:
+                return "please try again"
     elif topic == "you":
             return "I am a non AI chat-bot.\nMy only goal is to teach anyone how to play backgammon."
     elif topic == "feel":
-            return '''my creator designed me to be as human as posible but I cannot feel anything.
+            return '''my creator designed me to be as human as posible but I cannotyou feel anything.
         I am an early production, and maybe in the future I will have feelings and emotions.
         Thank you for asking :)'''
     elif topic == "quit":
