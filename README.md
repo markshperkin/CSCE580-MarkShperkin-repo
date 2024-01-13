@@ -19,3 +19,4 @@ strategies.py - a class for different small and simple strategies
 strategy_factory.py - a class to collect all the strategies
 
 to play backgammon or test the game modes, run chatbot.py and enter play.
+video demo link :  https://youtu.be/KEdOnzqHlmw
