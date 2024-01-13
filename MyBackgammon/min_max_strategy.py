@@ -22,9 +22,7 @@ class MinMaxStrategy(Strategy):
 
         read_only_board = ReadOnlyBoard(board)
         
-        # Find the best move using Minimax
-        # Make the best move on the actual board for each die roll
-        print("dice roll is:")
+        print("dice roll is:") 
         print(dice_roll)
         # Find the best move using Minimax
         best_moves = self.minimax(read_only_board, colour, dice_roll, self.depth)
@@ -39,6 +37,7 @@ class MinMaxStrategy(Strategy):
             # Define the move logic
         if best_moves == None:
             return
+        
         elif len(best_moves) == 1:
             single_move = best_moves[0]
             piece_at = single_move.get('piece_at')
@@ -47,6 +46,7 @@ class MinMaxStrategy(Strategy):
                 make_move(piece_at, roll_at)
         elif possible_moves == None:
             return
+        
         else:
             for move in possible_moves:
                 print("printing move and board that about to move")
@@ -56,7 +56,7 @@ class MinMaxStrategy(Strategy):
                 roll_at = move.get('die_roll')
                 if piece_at:
                     make_move(piece_at, roll_at)
-        # self.make_moves(best_moves)
+        # self.make_moves(best_moves)      #earlier version of move logic which did not work and kept for future refrance
         # dice_amount = len(dice_roll)
         # if len(best_moves['possible_moves']) == 1:
         #     possible_move = best_moves['possible_moves'][0]
@@ -91,17 +91,12 @@ class MinMaxStrategy(Strategy):
         
         if not valid_moves:
             print(f"No valid moves for {colour}. Skipping turn.")
-            return  # Skip to the next player's turn        
+            return  # Skip to the next player's turn    
 
-        # breakpoint()
-        if not valid_moves:
-            # No valid moves, return a dummy move
-            return {'value': 0, 'possible_moves': []}
         
         best_moves_combo = self.evaluate_moves(valid_moves, board, colour, result, dice_roll)
-        # go through moves
         # new_board = board.create_copy()
-        # moves = best_moves_combo['possible_moves']
+        # moves = best_moves_combo['possible_moves']     # evaluating the opponent move and calculating the min score which did not work
         # for move in moves:
         #     piece_at = move['piece_at']
         #     piece_at = new_board.get_piece_at(piece_at)
@@ -124,14 +119,11 @@ class MinMaxStrategy(Strategy):
         return best_moves_combo
     
     def evaluate_move(self, move, board, colour, state):
-    # Evaluate the move based on its impact on the overall board state
-    # You can customize this function for a more sophisticated evaluation
         try:
             new_board = board.create_copy()
             new_piece = new_board.get_piece_at(move['piece_at'])
             new_board.move_piece(new_piece, move['die_roll'])
             score = move['die_roll']
-        # Check if the move makes a vulnerable piece (count changes from 1 to 2)
             new_location = move['piece_at'] - move['die_roll']   #todo add one for white player
             old_location = move['piece_at']
             num = board.pieces_at(new_location)
@@ -142,15 +134,12 @@ class MinMaxStrategy(Strategy):
             num2 = len(num2)
             if num == 1 and num2 == 2 and old_location != 2:
                 score += 100
-            # check if move captured opponent
             old_board = board.create_copy()
             try:
                 piece_at_location = old_board.get_piece_at(new_location)
                 if piece_at_location.get_colour() == Colour.WHITE:
-                    # print("testing loop")
             # Check if there is only one piece at the location
                     if len(old_board.pieces_at(new_location)) == 1:
-                        # print("testing inside loop")
                         score += 200
             except AttributeError as e:
                 # Handle the AttributeError (e.g., print an error message)
@@ -162,10 +151,10 @@ class MinMaxStrategy(Strategy):
     
     def evaluate_moves(self, moves, board, colour, state, dice_roll):
         random_dice_rolls = [randint(1, 6), randint(1, 6)]
-        best_move1 = None
-        best_move2 = None
-        best_move3 = None
-        best_move4 = None
+        move1 = None
+        move2 = None
+        move3 = None
+        move4 = None
         best_moves = {'value': 0, 'possible_moves': []}
         if len(moves) == 1:
             return moves
@@ -319,7 +308,7 @@ class MinMaxStrategy(Strategy):
                                 print(final_score)
                                 best_moves['possible_moves'] = [move1, move2, move3, move4]
                                 board.print_board()
-                                breakpoint()
+                                # breakpoint()
         
         print("best moves are after evaluation:")
         print(best_moves)

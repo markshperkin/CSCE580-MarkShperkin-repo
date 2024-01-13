@@ -32,7 +32,7 @@ def Chat_bot(user_input):
 
             if "computer" in user_input.lower():
                 try:
-                    subprocess.run(['python', 'backgammon/single_player.py'], check=True)
+                    subprocess.run(['python', 'MyBackgammon/single_player.py'], check=True)
                     return "Game started successfully."
                 except subprocess.CalledProcessError as e:
                     return f"Error starting the game: {e}"  
